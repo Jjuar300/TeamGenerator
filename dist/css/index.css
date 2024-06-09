@@ -1,0 +1,26 @@
+
+.myTeamDiv{
+    position: absolute;
+    left: -3rem;
+    top:-.5rem; 
+    background-color: rgb(150, 73, 73);
+    color: white;
+    text-align: center; 
+    width: 199.7vh;
+}
+
+.teamCard{
+    position:absolute; 
+    border: solid 1px black;
+    top: 12rem;
+}
+
+.teamCard div {
+    position: relative;
+    top: -1.4rem;
+    background-color: rgb(103, 103, 138);
+}
+
+.details{
+    border: solid 1px red;
+}

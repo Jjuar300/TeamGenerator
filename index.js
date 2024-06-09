@@ -1,5 +1,11 @@
 const inquirer = require("inquirer");
 const prompt = inquirer.createPromptModule();
+const {
+  Employee, 
+  Engineer, 
+  Inter, 
+  Manager, 
+} = require('./lib/index')
 
 prompt([
   {
