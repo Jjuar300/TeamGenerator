@@ -1,4 +1,5 @@
-const inquirer = require('inquirer'); 
+// const inquirer = require('inquirer');
+import inquirer from 'inquirer'; 
 const prompt = inquirer.createPromptModule();
 
 prompt([

@@ -1,11 +1,10 @@
 const inquirer = require("inquirer");
 const prompt = inquirer.createPromptModule();
-const {
-  Employee, 
-  Engineer, 
-  Inter, 
-  Manager, 
-} = require('./lib/index')
+const { Engineer, Intern, Manager } = require("./lib/index");
+
+const engineers = []; 
+const interns = []; 
+const managers = []; 
 
 prompt([
   {
@@ -30,9 +29,17 @@ prompt([
     name: "officeNumber",
   },
 ]).then((asnwers) => {
-  console.log(asnwers);
-  showMenu()
-})
+  
+  const manager = new Manager(
+    asnwers.name, 
+    asnwers.id, 
+    asnwers.email, 
+    asnwers.officeNumber, 
+  )
+  
+  managers.push(manager)
+  showMenu();
+});
 
 function showMenu() {
   prompt([
@@ -42,76 +49,90 @@ function showMenu() {
       message: "Select action",
       choices: ["add an engineer", "add an intern", "finish building team"],
     },
-  ])
-  .then((asnwers) => {
-     console.log(asnwers)
+  ]).then((asnwers) => {
 
-     if(asnwers.action === 'add an engineer'){
-        showEngineer()
-     }else if(asnwers.action === 'add an intern'){
-         showIntern();  
-     }else{
-        
-     }
-     
-  })
+    if (asnwers.action === "add an engineer") {
+      showEngineer();
+    } else if (asnwers.action === "add an intern") {
+      showIntern();
+    } else {
+      
+    }
+  });
 }
 
+function showEngineer() {
+  prompt([
+    {
+      message: "Enter Engineers name",
+      name: "name",
+      type: "input",
+    },
+    {
+      type: "input",
+      message: "Enter Engineers id",
+      name: "id",
+    },
+    {
+      type: "input",
+      message: "Enter Engineers email",
+      name: "email",
+    },
 
-function showEngineer(){
-    prompt([
-        {
-            message: "Enter Engineers name",
-            name: "name",
-            type: "input",
-          },
-          {
-            type: "input",
-            message: "Enter Engineers id",
-            name: "id",
-          },
-          {
-            type: "input",
-            message: "Enter Engineers email",
-            name: "email",
-          },
-        
-          {
-            type: "input",
-            message: "Enter Engineers Github username",
-            name: "githubUsername",
-          },
-    ])
-    .then(() => {
-        showMenu(); 
-    })
+    {
+      type: "input",
+      message: "Enter Engineers Github username",
+      name: "githubUsername",
+    },
+  ]).then((asnwers) => {
+    const engineer = new Engineer(
+      asnwers.name,
+      asnwers.id,
+      asnwers.email,
+      asnwers.githubUsername
+    );
+    engineers.push(engineer)
+    showMenu();
+  });
 }
 
-function showIntern(){
-    prompt([
-        {
-            message: "Enter Inters name",
-            name: "name",
-            type: "input",
-          },
-          {
-            type: "input",
-            message: "Enter Inters id",
-            name: "id",
-          },
-          {
-            type: "input",
-            message: "Enter Inters email",
-            name: "email",
-          },
-        
-          {
-            type: "input",
-            message: "Enter Inters Github username",
-            name: "githubUsername",
-          },
-    ])
-    .then(() => {
-        showMenu(); 
-    })
+function showIntern() {
+  prompt([
+    {
+      message: "Enter Intern name",
+      name: "name",
+      type: "input",
+    },
+    {
+      type: "input",
+      message: "Enter Intern id",
+      name: "id",
+    },
+    {
+      type: "input",
+      message: "Enter Intern email",
+      name: "email",
+    },
+
+    {
+      type: "input",
+      message: "Enter Intern  school name",
+      name: "school",
+    },
+  ]).then((asnwers) => {
+    const intern = new Intern(
+      asnwers.name, 
+      asnwers.id, 
+      asnwers.email, 
+      asnwers.school, 
+    )
+    interns.push(intern)
+    showMenu();
+  });
+}
+
+module.exports = {
+  engineers,
+  interns,  
+  managers, 
 }

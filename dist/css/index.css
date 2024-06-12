@@ -1,26 +1,57 @@
+*{
+    margin:0; 
+    padding:0; 
+    box-sizing: border-box;
+}
 
-.myTeamDiv{
-    position: absolute;
-    left: -3rem;
-    top:-.5rem; 
-    background-color: rgb(150, 73, 73);
+header{
+    background-color: rgb(197, 81, 81);
     color: white;
-    text-align: center; 
-    width: 199.7vh;
+    text-align: center;
+    padding: 2rem;
+} 
+
+main{
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    flex-wrap: wrap;
 }
 
-.teamCard{
-    position:absolute; 
-    border: solid 1px black;
-    top: 12rem;
+.item {
+/* width: 250px;
+height: 300px; */
+box-shadow: rgba(0, 0, 0, 0.5 ) 2px 2px 10px;
 }
 
-.teamCard div {
-    position: relative;
-    top: -1.4rem;
-    background-color: rgb(103, 103, 138);
+.top-section{
+ background-color: dodgerblue;
+ color: white;
+ padding: 1rem; 
 }
 
-.details{
-    border: solid 1px red;
+.lower{
+    padding: 2rem 1rem;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center{
+  display: flex;
+  flex-direction: column;
+  gap: .3rem; 
+}
+
+.center p {
+    background-color: white;
+    padding: 1rem;
+    border: 1px solid  #e5e5e5;
+}
+
+.center a {
+    color: dodgerblue; 
 }
