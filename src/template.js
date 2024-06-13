@@ -1,4 +1,5 @@
-const { engineers, interns, managers } = require("../index");
+const fs = require('fs'); 
+const path = require('path'); 
 
 function createManager(manager) {
   return `
@@ -54,7 +55,7 @@ function createInter(intern) {
     `;
 }
 
-function generateHtml(...items) {
+function generateHtml(manager, engineers, interns) {
   return `
       <!DOCTYPE html>
 <html lang="en">
@@ -77,7 +78,9 @@ function generateHtml(...items) {
     </header>
 
     <main>
-      ${items}
+      ${manager}
+      ${engineers}
+      ${interns}
     </main>
   </body>
 </html>
@@ -85,65 +88,30 @@ function generateHtml(...items) {
       `;
 }
 
-function getName(name) {
-  return name;
+function makeManager(managers) {
+  return managers.map((manager) => {
+     return createManager(manager)
+  });  
 }
 
-function getId(id) {
-  return id;
-}
-
-function getEmail(email) {
-  return email;
-}
-
-function getGitHub(gitLink) {
-  return gitLink;
-}
-
-function getOfficeNumber(officeNumber) {
-  return officeNumber;
-}
-
-function getSchool(school) {
-  return school;
-}
-
-function getEngineer(engineer) {
-  engineer.map((data) => {
-    getName(data.name);
-    getId(data.id);
-    getEmail(data.email);
-    getGitHub(data.github);
+function makeEngineers(engineers) {
+ return engineers.map((engineer) => {
+    return createEngineer(engineer)
   });
 }
 
-function getManager(manager) {
-  manager.map((data) => {
-    getName(data.name);
-    getId(data.id);
-    getEmail(data.email);
-    getOfficeNumber(data.officeNumber);
+function makeIntern(interns) {
+  return interns.map((intern) => {
+   return createInter(intern); 
   });
 }
 
-function getIntern(intern) {
-  intern.map((data) => {
-    getName(data.name);
-    getId(data.id);
-    getEmail(data.email);
-    getSchool(data.school)
-  });
+function buildTeam(managers, engineers, interns){
+  const managerHtml = makeManager(managers);
+  const engineerHtml = makeEngineers(engineers); 
+  const internHtml = makeIntern(interns);  
+  const newHtml = generateHtml(managerHtml, engineerHtml, internHtml);  
+  fs.writeFileSync( path.resolve( __dirname, '../dist/index.html'), newHtml); 
 }
 
-const engineer = getEngineer(engineers);
-const manager = getManager(managers);
-const intern = getIntern(interns); 
-
-const newManager = createManager(manager); 
-const newEngineer = createEngineer(engineer); 
-const newIntern = createInter(intern); 
-
-const newHtml = generateHtml(newEngineer, newIntern, newManager); 
-
-document.querySelector('main').innerHTML = newHtml; 
+module.exports = buildTeam; 

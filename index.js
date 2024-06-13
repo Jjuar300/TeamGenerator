@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const prompt = inquirer.createPromptModule();
 const { Engineer, Intern, Manager } = require("./lib/index");
+const buildTeam = require('./src/template'); 
 
 const engineers = []; 
 const interns = []; 
@@ -36,7 +37,7 @@ prompt([
     asnwers.email, 
     asnwers.officeNumber, 
   )
-  
+
   managers.push(manager)
   showMenu();
 });
@@ -56,7 +57,7 @@ function showMenu() {
     } else if (asnwers.action === "add an intern") {
       showIntern();
     } else {
-      
+      buildTeam(managers, engineers, interns); 
     }
   });
 }
@@ -131,8 +132,3 @@ function showIntern() {
   });
 }
 
-module.exports = {
-  engineers,
-  interns,  
-  managers, 
-}
